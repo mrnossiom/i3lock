@@ -48,7 +48,6 @@
 #include "dpi.h"
 
 #include <gif_lib.h>
-#include <arpa/inet.h>
 #include <pthread.h>
 
 #define TSTAMP_N_SECS(n) (n * 1.0)
