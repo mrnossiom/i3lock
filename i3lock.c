@@ -1518,8 +1518,10 @@ int main(int argc, char *argv[]) {
     ev_prepare_init(xcb_prepare, xcb_prepare_cb);
     ev_prepare_start(main_loop, xcb_prepare);
 
-    ev_timer_init(xcb_timer, gif_anim_loop, gif_img[0].delay_sec, 0.);
-    ev_timer_start(main_loop, xcb_timer);
+    if (gif_img) {
+        ev_timer_init(xcb_timer, gif_anim_loop, gif_img[0].delay_sec, 0.);
+        ev_timer_start(main_loop, xcb_timer);
+    }
 
     /* Invoke the event callback once to catch all the events which were
      * received up until now. ev will only pick up new events (when the X11
