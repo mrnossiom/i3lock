@@ -1,9 +1,12 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+
+    gitignore.url = "github:hercules-ci/gitignore.nix";
+    gitignore.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, gitignore }:
     let
       inherit (nixpkgs.lib) genAttrs;
 
@@ -17,6 +20,11 @@
     in
     {
       formatter = forAllPkgs (pkgs: pkgs.nixpkgs-fmt);
+
+      packages = forAllPkgs (pkgs: rec {
+        default = app;
+        app = pkgs.callPackage ./package.nix { inherit gitignore; };
+      });
 
       devShells = forAllPkgs (pkgs:
         with pkgs.lib;

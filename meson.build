@@ -72,6 +72,7 @@ add_project_arguments('-D_GNU_SOURCE', language: 'c')
 # https://mesonbuild.com/howtox.html#add-math-library-lm-portably
 m_dep = cc.find_library('m', required: false)
 rt_dep = cc.find_library('rt', required: false)
+giflib_dep = cc.find_library('gif')
 
 xcb_dep = dependency('xcb', method: 'pkg-config')
 xcb_xkb_dep = dependency('xcb-xkb', method: 'pkg-config')
@@ -112,6 +113,7 @@ i3lock_deps = [
   xcb_util_xrm_dep,
   xkbcommon_dep,
   xkbcommon_x11_dep,
+  giflib_dep,
 ]
 
 host_os = host_machine.system()
